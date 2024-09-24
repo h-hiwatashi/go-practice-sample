@@ -1,0 +1,2 @@
+# go-practice-sample
+Goのサンプルコード
