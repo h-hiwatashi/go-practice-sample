@@ -1,40 +1,34 @@
 /*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+Copyright © 2024 NAME HERE <EMAIL ADDRESS>
+
 */
 package cmd
 
 import (
-	"log"
-	"net/http"
 	"os"
 
-	"github.com/SND1231/go-column/router"
-	"github.com/SND1231/go-column/setting"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
-var dbSetting setting.DB
 
+
+// rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use: "go-column",
-	Run: func(cmd *cobra.Command, args []string) {
-		// configの中身を出力
-		log.Printf("configの中身:{type: %s, host: %s, port: %d, user: %s, pass: %s, name: %s}",
-			dbSetting.Type, dbSetting.Host, dbSetting.Port, dbSetting.User, dbSetting.Password, dbSetting.Name)
+	Use:   "go-practice-sample",
+	Short: "A brief description of your application",
+	Long: `A longer description that spans multiple lines and likely contains
+examples and usage of using your application. For example:
 
-		// サーバーの設定
-		r := router.Get(dbSetting)
-		srv := &http.Server{
-			Addr:    ":3020",
-			Handler: r,
-		}
-
-		// サーバーの起動
-		srv.ListenAndServe()
-	},
+Cobra is a CLI library for Go that empowers applications.
+This application is a tool to generate the needed files
+to quickly create a Cobra application.`,
+	// Uncomment the following line if your bare application
+	// has an action associated with it:
+	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
+// Execute adds all child commands to the root command and sets flags appropriately.
+// This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
@@ -43,27 +37,15 @@ func Execute() {
 }
 
 func init() {
-	// 初期化処理
-	// configの設定
-	rootCmd.Flags().StringP("configName", "n", "default.toml", "config file name")
+	// Here you will define your flags and configuration settings.
+	// Cobra supports persistent flags, which, if defined here,
+	// will be global for your application.
 
-	// Runを実行するたびに、initConfigを呼び出す。その後に、Runの処理が動き出す。
-	cobra.OnInitialize(initConfig)
+	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.go-practice-sample.yaml)")
+
+	// Cobra also supports local flags, which will only run
+	// when this action is called directly.
+	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
-func initConfig() {
-	configName, _ := rootCmd.Flags().GetString("configName")
-	viper.SetConfigFile(configName)
 
-	// 設定ファイルを読み込む
-	if err := viper.ReadInConfig(); err != nil {
-		log.Println(err)
-		os.Exit(1)
-	}
-
-	// 設定ファイルの内容を構造体に設定
-	if err := viper.Unmarshal(&dbSetting); err != nil {
-		log.Println(err)
-		os.Exit(1)
-	}
-}

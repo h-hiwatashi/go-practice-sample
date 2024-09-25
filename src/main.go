@@ -1,10 +1,10 @@
 /*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
+Copyright © 2024 NAME HERE <EMAIL ADDRESS>
 
 */
 package main
 
-import "github.com/SND1231/go-column/cmd"
+import "github.com/h-hiwatashi/go-practice-sample/cmd"
 
 func main() {
 	cmd.Execute()
