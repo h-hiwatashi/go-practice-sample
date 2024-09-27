@@ -1,13 +1,14 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"log"
+	"net/http"
 	"os"
 
+	"github.com/h-hiwatashi/go-practice-sample/router"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -23,13 +24,22 @@ type Config struct {
 
 var config Config
 
-
 var rootCmd = &cobra.Command{
 	Use: "go-column",
 	Run: func(cmd *cobra.Command, args []string) {
 		// configの中身を出力
 		log.Printf("configの中身:{type: %s, host: %s, port: %d, user: %s, pass: %s, name: %s}",
 			config.Type, config.Host, config.Port, config.User, config.Password, config.Name)
+
+		// サーバーの設定
+		r := router.Get()
+		srv := &http.Server{
+			Addr:    ":3020",
+			Handler: r,
+		}
+
+		// サーバーの起動
+		srv.ListenAndServe()
 	},
 }
 

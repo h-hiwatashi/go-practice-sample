@@ -5,10 +5,10 @@ import (
 	"database/sql"
 	"testing"
 
-	"github.com/SND1231/go-column/db"
-	"github.com/SND1231/go-column/models"
 	"github.com/google/go-cmp/cmp"
 	"github.com/google/go-cmp/cmp/cmpopts"
+	"github.com/h-hiwatashi/go-practice-sample/db"
+	"github.com/h-hiwatashi/go-practice-sample/models"
 
 	_ "github.com/go-sql-driver/mysql"
 )

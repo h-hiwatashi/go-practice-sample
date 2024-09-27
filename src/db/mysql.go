@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/SND1231/go-column/setting"
+	"github.com/h-hiwatashi/go-practice-sample/setting"
 )
 
 func GetDBconnection(dbSetting setting.DB) (*sql.DB, error) {

@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"net/http"
 
-	"github.com/SND1231/go-column/models"
+	"github.com/h-hiwatashi/go-practice-sample/models"
 	"github.com/mholt/binding"
 	"github.com/volatiletech/sqlboiler/v4/boil"
 
