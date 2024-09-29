@@ -2,6 +2,7 @@
 build:
 	go build .
 
+# コードを自動生成するSQLBoilerコマンド
 .PHONY: sqlboiler
 sqlboiler:
 	sqlboiler mysql
